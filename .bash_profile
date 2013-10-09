@@ -6,7 +6,17 @@ export IOTOOL_BUILD_SERVER="host130.xiv.ibm.com"
 export IOTOOL_LOCAL_DIR="/Users/alekseyd/src/iotool/"
 export IOTOOL_REMOTE_DIR="/a/home/alekseyd/git/tlib/deps/iotool/"
 
-alias ls='ls -FG'
+alias ls='/bin/ls $LS_OPTIONS'
+#options for GNU version of ls
+export LS_OPTIONS="-NF --color --tabsize 0"
+#if it's not GNU, switch to POSIX options
+ls >/dev/null 2>&1 || export LS_OPTIONS='-FG'
+
+alias ll='ls -l'
+alias lh='ls -lh'
+alias la='ls -la'
+alias lc='ls -l --color=no'
+
 export PS1="\u@\h:\w>"
 
 function sgrep () 
@@ -23,6 +33,7 @@ TLIB=~/git/tlib
 IOTOOL=$TLIB/iotool
 alias cd..='cd ..'
 alias cd.='cd .'
+alias cd...='cd ../..'
 alias cdt='cd $TLIB'
 alias cdi='cd $IOTOOL'
 alias cdic='cd $IOTOOL/contents/client/'
