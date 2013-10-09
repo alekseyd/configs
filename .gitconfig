@@ -1,0 +1,53 @@
+[user]
+	name = Aleksey Dashevsky
+	email = alekseyd@il.ibm.com
+
+[color]    
+    ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+
+[apply]
+    whitespace = fix
+
+[alias]
+    trash = !git add . && git commit -m 'trash' && git reset --hard HEAD^
+    propose = !git push --set-upstream origin +HEAD:$USER/proposed/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
+    unpropose = !git push origin +:$USER/proposed/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
+    integrate = !git push origin +HEAD:$USER/integrate/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
+    unintegrate = !git push origin +:$USER/integrate/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
+    # Provide a nice, compact format for the git log (use with `git lg`)
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)%an%Creset' --abbrev-commit --date=relative
+
+[push]
+    default = tracking
+[core]
+    editor=vim
+
+[difftool "kdiff3"]
+    path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+    trustExitCode = false
+[difftool "p4merge"]
+    path = /Applications/p4merge.app/Contents/MacOS/p4merge 
+    trustExitCode = false
+[difftool]
+    prompt = false
+[diff]
+    tool = p4merge
+
+[mergetool "kdiff3"]
+    path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+    trustExitCode = false
+[mergetool "p4merge"]
+    path = /Applications/p4merge.app/Contents/MacOS/p4merge 
+    trustExitCode = false
+[mergetool]
+    keepBackup = false
+    prompt = false
+[merge]
+    tool = p4merge
+
+[credential]
+	helper = osxkeychain
