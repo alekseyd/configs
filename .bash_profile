@@ -8,7 +8,7 @@ export IOTOOL_REMOTE_DIR="/a/home/alekseyd/git/tlib/deps/iotool/"
 
 alias ls='/bin/ls $LS_OPTIONS'
 #options for GNU version of ls
-export LS_OPTIONS="-NF --color --tabsize 0"
+export LS_OPTIONS="--classify --literal --color --tabsize 0"
 #if it's not GNU, switch to POSIX options
 ls >/dev/null 2>&1 || export LS_OPTIONS='-FG'
 
