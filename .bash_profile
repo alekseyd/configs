@@ -1,6 +1,8 @@
 
 export PATH=$PATH:~/git/investigate
-export PATH=/usr/local/bin:/usr/local/opt:$PATH
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt:$PATH"
 
 export IOTOOL_BUILD_SERVER="host130.xiv.ibm.com"
 export IOTOOL_LOCAL_DIR="/Users/alekseyd/src/iotool/"
