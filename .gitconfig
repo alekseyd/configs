@@ -51,3 +51,8 @@
 
 [credential]
 	helper = osxkeychain
+[branch "master"]
+	rebase = true
+[branch]
+	autosetupmerge = true
+	autosetuprebase = remote
