@@ -1,3 +1,10 @@
+" Pathogen
+filetype off " Pathogen needs to run before plugin indent on
+call pathogen#infect()
+call pathogen#helptags() " generate helptags for everything in 'runtimepath'
+filetype plugin indent on
+
+"setup whitespaces, indentations etc.
 set tabstop=4 expandtab autoindent cindent shiftwidth=4
 
 "syntax highlight
