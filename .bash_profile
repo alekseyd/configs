@@ -3,6 +3,7 @@ export PATH=$PATH:~/git/investigate
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt:$PATH"
+export PATH="~/git/arcanist/bin:$PATH"
 
 export IOTOOL_BUILD_SERVER="host130.xiv.ibm.com"
 export IOTOOL_LOCAL_DIR="/Users/alekseyd/src/iotool/"
@@ -62,6 +63,10 @@ elif [ -f $(brew --prefix)/etc/bash_completion ]; then
 elif [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
 # Homebrew bash-completion2:
     . $(brew --prefix)/share/bash-completion/bash_completion
+fi
+#Arcanist bash completion
+if [ -f ~/git/arcanist/resources/shell/bash-completion ]; then
+    . ~/git/arcanist/resources/shell/bash-completion
 fi
 
 case "$TERM" in
