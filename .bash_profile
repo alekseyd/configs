@@ -70,7 +70,7 @@ if [ -f ~/git/arcanist/resources/shell/bash-completion ]; then
 fi
 
 case "$TERM" in
-    screen|xterm-color|xterm)
+    screen|xterm-color|xterm|xterm-256color)
         normal="\[\e[00m\]"
         bold="\[\e[01m\]"
         green="\[\e[00;32m\]"

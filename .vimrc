@@ -10,6 +10,7 @@ filetype plugin indent on
 set tabstop=4 softtabstop=4 expandtab smarttab smartindent  shiftwidth=4 formatoptions=croql
 
 "syntax highlight
+set t_Co=256
 syntax on
 
 "status bar
