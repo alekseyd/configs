@@ -11,7 +11,7 @@ set tabstop=4 softtabstop=4 expandtab smarttab smartindent  shiftwidth=4 formato
 
 "syntax highlight
 set t_Co=256
-syntax on
+syntax enable
 
 "status bar
 set ruler
@@ -28,7 +28,7 @@ set autoread
 "always ask for confirmation when in doubt
 set confirm
 
-set mouse=a
+"set mouse=a
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
