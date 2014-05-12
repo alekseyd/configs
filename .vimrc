@@ -18,7 +18,10 @@ set ruler
 set laststatus=2
 
 "search options
-set smartcase
+set ignorecase
+set smartcase           " Override the 'ignorecase' option if the search pattern contains upper
+                        "case characters.  Only used when the search pattern is typed and
+                        "'ignorecase' option is on.
 set incsearch
 set wrapscan
 
@@ -40,3 +43,8 @@ autocmd BufReadPost *
     \   exe "normal g`\"" |
     \ endif
 
+" Configuration for YouCompleteMe
+" let g:ycm_extra_conf_globlist = ['contents/server']
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
