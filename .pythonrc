@@ -1,0 +1,13 @@
+# TODO: check virtualenv and  virtualenvwrapper are installed
+source /usr/local/bin/virtualenvwrapper.sh
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+# cache pip-installed packages to avoid re-downloading
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+#Use syspip instead of pip when installing Python packages
+#for system wide Python
+syspip(){
+       PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
