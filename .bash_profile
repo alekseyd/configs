@@ -118,4 +118,16 @@ function rmb {
   fi
 }
 
+#Calculate actual location of .profile script (after resolving all softlinks)
+function resolv_path {
+    scritpname=$1
+    while [ -h $scritpname ]; do scritpname=`readlink $scritpname`; done
+    echo $scritpname
+}
+
+#Python fine tuning
+RESOLVED_NAME=`resolv_path ${BASH_SOURCE[0]}`
+pushd `dirname $RESOLVED_NAME`
+source .pythonrc
+popd
 

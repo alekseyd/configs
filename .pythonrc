@@ -1,5 +1,14 @@
-# TODO: check virtualenv and  virtualenvwrapper are installed
-source /usr/local/bin/virtualenvwrapper.sh
+# pip completion, inspired by:
+# http://pip.readthedocs.org/en/latest/user_guide.html#command-completion
+eval "`pip completion --bash`"
+
+#fine tuning for pip and virtualenv 
+#inspired by http://hackercodex.com/guide/python-development-environment-on-mac-osx/
+
+## do we have virtualenv installed ?
+#virtualenvwrapper depends on virtualenv, so it's enough to check only former
+VIRTUALENVWRAPPER=`command -v virtualenvwrapper.sh`
+[ ! -z "$VIRTUALENVWRAPPER" ] && source $VIRTUALENVWRAPPER
 
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
@@ -11,3 +20,7 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
 syspip(){
        PIP_REQUIRE_VIRTUALENV="" pip "$@"
 }
+
+#INFINIDAT specific
+export PIP_INDEX_URL=http://pypi01.infinidat.com/simple/
+export PIP_EXTRA_INDEX_URL=https://pypi.python.org/simple/
