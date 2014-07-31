@@ -1,13 +1,14 @@
 
-export PATH=$PATH:~/git/investigate
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt:$PATH"
-export PATH="~/git/arcanist/bin:$PATH"
 
-export IOTOOL_BUILD_SERVER="host130.xiv.ibm.com"
-export IOTOOL_LOCAL_DIR="/Users/alekseyd/src/iotool/"
-export IOTOOL_REMOTE_DIR="/a/home/alekseyd/git/tlib/deps/iotool/"
+export MANPATH=`manpath`
+LINUXENVMAN="$HOME/LINUXENV/usr/share/man"
+export MANPATH=$LINUXENVMAN:$MANPATH
+
+# setup locale correctly
+[  -z "$LC_ALL" ] && export LC_ALL=en_US.UTF-8
+[  -z "$LANG" ] && export LANG=en_US.UTF-8
 
 alias ls='/bin/ls $LS_OPTIONS'
 #options for GNU version of ls
@@ -18,7 +19,10 @@ ls >/dev/null 2>&1 || export LS_OPTIONS='-FG'
 alias ll='ls -l'
 alias lh='ls -lh'
 alias la='ls -la'
+
 alias lc='ls -l --color=no'
+#if it's not GNU, switch to POSIX options
+lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 
 export PS1="\u@\h:\w>"
 
@@ -32,21 +36,9 @@ function pgrep ()
     find . -name "*.py" | xargs grep -n "$@"
 }
 
-TLIB=~/git/tlib
-IOTOOL=$TLIB/iotool
 alias cd..='cd ..'
 alias cd.='cd .'
 alias cd...='cd ../..'
-alias cdt='cd $TLIB'
-alias cdi='cd $IOTOOL'
-alias cdic='cd $IOTOOL/contents/client/'
-alias cds='cd $IOTOOL/contents/server/'
-alias cdit='cd $IOTOOL/contents/testing/'
-alias cdtt='cd ~/git/tests/'
-alias cdv='cd ~/git/tests/vaai/'
-
-alias fh='find_sysconf.py host'
-alias fs='find_sysconf.py system'
 
 function git_parse_branch() 
 {
@@ -63,10 +55,6 @@ elif [ -f $(brew --prefix)/etc/bash_completion ]; then
 elif [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
 # Homebrew bash-completion2:
     . $(brew --prefix)/share/bash-completion/bash_completion
-fi
-#Arcanist bash completion
-if [ -f ~/git/arcanist/resources/shell/bash-completion ]; then
-    . ~/git/arcanist/resources/shell/bash-completion
 fi
 
 case "$TERM" in
@@ -130,4 +118,10 @@ RESOLVED_NAME=`resolv_path ${BASH_SOURCE[0]}`
 pushd `dirname $RESOLVED_NAME`
 source .pythonrc
 popd
+
+#Infinidat related stuff
+INFINIO=~/git/infinio
+alias cdi='cd $INFINIO'
+alias cdh='cd $INFINIO/host_src'
+##################
 
