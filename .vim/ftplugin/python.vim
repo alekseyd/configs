@@ -1,5 +1,4 @@
 setlocal number
-setlocal cindent
 
 " colorscheme wombat256
 

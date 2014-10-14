@@ -1,5 +1,9 @@
 setlocal number
-setlocal cindent
+
+" turn syntax highlighting off for XML files
+syntax off
+" restore syntax highlight
+autocmd BufLeave * :syntax on
 
 " colorscheme wombat256
 
