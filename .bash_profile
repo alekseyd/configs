@@ -26,12 +26,12 @@ lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 
 export PS1="\u@\h:\w>"
 
-function sgrep () 
+function sgrep ()
 {
     find . -name "*.[ch]pp" | xargs grep -n "$@"
     find . -name "*.[ch]" | xargs grep -n "$@"
 }
-function pgrep () 
+function pgrep ()
 {
     find . -name "*.py" | xargs grep -n "$@"
 }
@@ -40,7 +40,7 @@ alias cd..='cd ..'
 alias cd.='cd .'
 alias cd...='cd ../..'
 
-function git_parse_branch() 
+function git_parse_branch()
 {
     name=`git branch 2>/dev/null | grep "^\*" | tr -d "\*\ "`
     [[ -z $name ]] || echo \[$name\]
@@ -49,12 +49,17 @@ function git_parse_branch()
 # MacPorts Bash shell command completion
 if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
-elif [ -f $(brew --prefix)/etc/bash_completion ]; then
-# Homebrew Bash shell command completion
-    . $(brew --prefix)/etc/bash_completion
-elif [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-# Homebrew bash-completion2:
-    . $(brew --prefix)/share/bash-completion/bash_completion
+else 
+    type brew 2>&- 1>&-
+    if [ -z $? ]; then
+        if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        # Homebrew Bash shell command completion
+            . $(brew --prefix)/etc/bash_completion
+        elif [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+        # Homebrew bash-completion2:
+            . $(brew --prefix)/share/bash-completion/bash_completion
+        fi
+    fi
 fi
 
 case "$TERM" in
@@ -65,7 +70,9 @@ case "$TERM" in
         magenta="\[\e[00;36m\]"
         purple="\[\e[00;35m\]"
         darkgrey="\[\e[01;30m\]"
-        export PS1="${green}\u${bold}@${normal}MACBOOK${bold}:${purple}\w${darkgrey}\$(git_parse_branch)${normal}> "
+#        HOSTNAME="MACBOOK"
+        HOSTNAME=$(hostname -s)
+        export PS1="${green}\u${bold}@${normal}${HOSTNAME}${bold}:${purple}\w${darkgrey}\$(git_parse_branch)${normal}> "
         unset normal bold green magenta purple darkgrey
         # reload .history and set the title to user@host:dir
         PROMPT_COMMAND='history -a; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} ($(git_parse_branch))\007"'
@@ -114,10 +121,13 @@ function resolv_path {
 }
 
 #Python fine tuning
-RESOLVED_NAME=`resolv_path ${BASH_SOURCE[0]}`
-pushd `dirname $RESOLVED_NAME`
-source .pythonrc
-popd
+type pip 2>&- 1>&-
+if [ -z $? ]; then
+    RESOLVED_NAME=`resolv_path ${BASH_SOURCE[0]}`
+    pushd `dirname $RESOLVED_NAME`
+    source .pythonrc
+    popd
+fi
 
 #Infinidat related stuff
 INFINIO=~/git/infinio
