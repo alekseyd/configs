@@ -50,8 +50,8 @@ function git_parse_branch()
 if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 else 
-    type brew 2>&- 1>&-
-    if [ -z $? ]; then
+    type brew 2>/dev/null 1>/dev/null
+    if [ $? -eq "0" ]; then
         if [ -f $(brew --prefix)/etc/bash_completion ]; then
         # Homebrew Bash shell command completion
             . $(brew --prefix)/etc/bash_completion
