@@ -18,6 +18,10 @@
     unpropose = !git push origin +:$USER/proposed/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
     integrate = !git push origin +HEAD:$USER/integrate/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
     unintegrate = !git push origin +:$USER/integrate/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
+
+    wip = !git push --set-upstream origin +HEAD:$USER/wip/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
+    unwip = !git push origin +:$USER/wip/$(git-symbolic-ref HEAD | sed 's/^refs\\/heads\\///')
+
     # Provide a nice, compact format for the git log (use with `git lg`)
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)%an%Creset' --abbrev-commit --date=relative
 
