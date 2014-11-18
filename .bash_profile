@@ -70,7 +70,6 @@ case "$TERM" in
         magenta="\[\e[00;36m\]"
         purple="\[\e[00;35m\]"
         darkgrey="\[\e[01;30m\]"
-#        HOSTNAME="MACBOOK"
         HOSTNAME=$(hostname -s)
         export PS1="${green}\u${bold}@${normal}${HOSTNAME}${bold}:${purple}\w${darkgrey}\$(git_parse_branch)${normal}> "
         unset normal bold green magenta purple darkgrey
@@ -114,19 +113,19 @@ function rmb {
 }
 
 #Calculate actual location of .profile script (after resolving all softlinks)
-function resolv_path {
+function resolve_path {
     scritpname=$1
     while [ -h $scritpname ]; do scritpname=`readlink $scritpname`; done
     echo $scritpname
 }
 
 #Python fine tuning
-type pip 2>&- 1>&-
-if [ -z $? ]; then
-    RESOLVED_NAME=`resolv_path ${BASH_SOURCE[0]}`
-    pushd `dirname $RESOLVED_NAME`
+type pip 2>/dev/null 1>&2
+if [ $? -eq 0 ]; then
+    RESOLVED_NAME=`resolve_path ${BASH_SOURCE[0]}`
+    pushd `dirname $RESOLVED_NAME` >/dev/null
     source .pythonrc
-    popd
+    popd >/dev/null
 fi
 
 #Infinidat related stuff
