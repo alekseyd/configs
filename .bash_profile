@@ -24,6 +24,11 @@ alias lc='ls -l --color=no'
 #if it's not GNU, switch to POSIX options
 lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 
+#If no "vi" installed -- use "vim" instead
+type vi 2>/dev/null 1>/dev/null
+if [ $? -ne "0" ]; then
+    alias vi=vim
+fi
 export PS1="\u@\h:\w>"
 
 function sgrep ()
