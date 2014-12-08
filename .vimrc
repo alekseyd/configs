@@ -1,20 +1,47 @@
-" Pathogen
-filetype off " Pathogen needs to run before plugin indent on
-call pathogen#infect()
-call pathogen#helptags() " generate helptags for everything in 'runtimepath'
+" Pathogen/Vundle
+filetype off " Pathogen/Vundle needs to run before plugin indent on
+" call pathogen#infect()
+" call pathogen#helptags() " generate helptags for everything in 'runtimepath'
+set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/
+call vundle#begin('~/.vim/bundle')
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'elzr/vim-json.git'
+Plugin 'majutsushi/tagbar.git'
+
+" Color schemes
+Plugin 'dsolstad/vim-wombat256i.git'
+Plugin 'vim-scripts/Wombat.git'
+Plugin 'vim-scripts/wombat256.vim.git'
+Plugin 'ercolanelli-leo/candyVirus'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 set nocompatible
 filetype plugin on
 filetype plugin indent on
 
+" Setup vim command and menu completion
+set wildmode=full
+set wildmenu
+
 "setup whitespaces, indentations etc.
 set tabstop=4 softtabstop=4 expandtab smarttab smartindent  shiftwidth=4 formatoptions=croql
 
+" Tagbar key mapping and tuning
 call tagbar#autoopen(0)
 map <F8> :TagbarOpenAutoClose<CR>
 map <S-F8> :TagbarClose<CR>
 map <M-F8> :Tagbar<CR>
 
 "doesn't work.....     ##########call NERDTree#autoopen(0)
+" Nerdtree key mapping and tuning
 map <F10> :NERDTreeToggle<CR>
 map <S-F10> :NERDTreeFind<CR>
 

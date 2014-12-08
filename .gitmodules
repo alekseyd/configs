@@ -1,36 +1,39 @@
-[submodule ".vim/bundle/ctrlp.vim"]
-	path = .vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree
-[submodule ".vim/bundle/vim-vividchalk"]
-	path = .vim/bundle/vim-vividchalk
-	url = https://github.com/tpope/vim-vividchalk
-[submodule ".vim/bundle/vim-sensible"]
-	path = .vim/bundle/vim-sensible
-	url = https://github.com/tpope/vim-sensible
-[submodule ".vim/bundle/candyVirus"]
-	path = .vim/bundle/candyVirus
-	url = https://github.com/ercolanelli-leo/candyVirus
-[submodule ".vim/bundle/Wombat"]
-	path = .vim/bundle/Wombat
-	url = https://github.com/vim-scripts/Wombat.git
-[submodule ".vim/bundle/vim-wombat256i"]
-	path = .vim/bundle/vim-wombat256i
-	url = https://github.com/dsolstad/vim-wombat256i.git
-[submodule ".vim/bundle/wombat256.vim"]
-	path = .vim/bundle/wombat256.vim
-	url = https://github.com/vim-scripts/wombat256.vim.git
-[submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
-[submodule ".vim/bundle/vim-fugitive"]
-	path = .vim/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive
-[submodule ".vim/bundle/tagbar"]
-	path = .vim/bundle/tagbar
-	url = git@github.com:majutsushi/tagbar.git
-[submodule ".vim/bundle/vim-json"]
-	path = .vim/bundle/vim-json
-	url = git@github.com:elzr/vim-json.git
+#[submodule ".vim/bundle/ctrlp.vim"]
+#	path = .vim/bundle/ctrlp.vim
+#	url = https://github.com/kien/ctrlp.vim
+#[submodule ".vim/bundle/nerdtree"]
+#	path = .vim/bundle/nerdtree
+#	url = https://github.com/scrooloose/nerdtree
+#[submodule ".vim/bundle/vim-vividchalk"]
+#	path = .vim/bundle/vim-vividchalk
+#	url = https://github.com/tpope/vim-vividchalk
+#[submodule ".vim/bundle/vim-sensible"]
+#	path = .vim/bundle/vim-sensible
+#	url = https://github.com/tpope/vim-sensible
+#[submodule ".vim/bundle/candyVirus"]
+#	path = .vim/bundle/candyVirus
+#	url = https://github.com/ercolanelli-leo/candyVirus
+#[submodule ".vim/bundle/Wombat"]
+#	path = .vim/bundle/Wombat
+#	url = https://github.com/vim-scripts/Wombat.git
+#[submodule ".vim/bundle/vim-wombat256i"]
+#	path = .vim/bundle/vim-wombat256i
+#	url = https://github.com/dsolstad/vim-wombat256i.git
+#[submodule ".vim/bundle/wombat256.vim"]
+#	path = .vim/bundle/wombat256.vim
+#	url = https://github.com/vim-scripts/wombat256.vim.git
+#[submodule ".vim/bundle/YouCompleteMe"]
+#	path = .vim/bundle/YouCompleteMe
+#	url = https://github.com/Valloric/YouCompleteMe
+#[submodule ".vim/bundle/vim-fugitive"]
+#	path = .vim/bundle/vim-fugitive
+#	url = https://github.com/tpope/vim-fugitive
+#[submodule ".vim/bundle/tagbar"]
+#	path = .vim/bundle/tagbar
+#	url = git@github.com:majutsushi/tagbar.git
+#[submodule ".vim/bundle/vim-json"]
+#	path = .vim/bundle/vim-json
+#	url = git@github.com:elzr/vim-json.git
+[submodule ".vim/autoload/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = https://github.com/gmarik/Vundle.vim.git
