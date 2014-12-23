@@ -25,6 +25,7 @@ alias lc='ls -l --color=no'
 lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 
 #If no "vi" installed -- use "vim" instead
+export EDITOR=`which vim`
 type vi 2>/dev/null 1>/dev/null
 if [ $? -ne "0" ]; then
     alias vi=vim
