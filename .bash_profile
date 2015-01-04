@@ -136,7 +136,11 @@ fi
 
 #Infinidat related stuff
 INFINIO=~/git/infinio
+INFINITEST=~/git/infinitest
+TESTS=~/git/tests
 alias cdi='cd $INFINIO'
 alias cdh='cd $INFINIO/host_src'
+alias cds='cd $INFINITEST'
+alias cdt='cd $TESTS'
 ##################
 
