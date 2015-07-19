@@ -1,3 +1,7 @@
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
 
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
@@ -24,12 +28,10 @@ alias lc='ls -l --color=no'
 #if it's not GNU, switch to POSIX options
 lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 
-#If no "vi" installed -- use "vim" instead
-export EDITOR=`which vim`
-type vi 2>/dev/null 1>/dev/null
-if [ $? -ne "0" ]; then
-    alias vi=vim
-fi
+#If "vim" has been installed -- alias vi to vim
+type vim 2>/dev/null 1>&2 && ! alias vim 2>/dev/null 1>&2 && alias vi=vim
+export EDITOR=`which vi`
+
 export PS1="\u@\h:\w>"
 
 function sgrep ()
@@ -69,7 +71,7 @@ else
 fi
 
 case "$TERM" in
-    screen|xterm-color|xterm|xterm-256color)
+    screen|xterm-color|xterm|xterm-256color|cygwin)
         normal="\[\e[00m\]"
         bold="\[\e[01m\]"
         green="\[\e[00;32m\]"
@@ -134,13 +136,12 @@ if [ $? -eq 0 ]; then
     popd >/dev/null
 fi
 
-#Infinidat related stuff
-INFINIO=~/git/infinio
-INFINITEST=~/git/infinitest
-TESTS=~/git/tests
-alias cdi='cd $INFINIO'
-alias cdh='cd $INFINIO/host_src'
-alias cds='cd $INFINITEST'
-alias cdt='cd $TESTS'
-##################
-
+#JETHRODATA related stuff
+export LD_LIBRARY_PATH="/usr/local/lib:/usr/java/latest/jre/lib/amd64/server:/usr/lib/impala/lib/"
+export JETHRO_HOME=~/opt/jethro/current
+JETHRO_SRC=~/SVN/jethro
+[[ -d $JETHRO_SRC ]] && alias cdj='cd $JETHRO_SRC'
+SANITY=~/SVN/sanity
+[[ -d $SANITY ]] && alias cds='cd $SANITY' || unset SANITY
+QA_AUTO=~/SVN/qa_auto
+[[ -d $QA_AUTO ]] && alias cdq='cd $QA_AUTO' || unset QA_AUTO
