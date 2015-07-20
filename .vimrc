@@ -2,7 +2,7 @@
 filetype off " Pathogen/Vundle needs to run before plugin indent on
 " call pathogen#infect()
 " call pathogen#helptags() " generate helptags for everything in 'runtimepath'
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/autoload/Vundle.vim
 set rtp+=~/.vim/bundle/
 call vundle#begin('~/.vim/bundle')
 " alternatively, pass a path where Vundle should install plugins

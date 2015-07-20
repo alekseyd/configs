@@ -35,5 +35,5 @@
 #	path = .vim/bundle/vim-json
 #	url = git@github.com:elzr/vim-json.git
 [submodule ".vim/autoload/Vundle.vim"]
-	path = .vim/bundle/Vundle.vim
+	path = .vim/autoload/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
