@@ -60,6 +60,7 @@ set smartcase           " Override the 'ignorecase' option if the search pattern
                         "'ignorecase' option is on.
 set incsearch
 set wrapscan
+set nohls
 
 set autowrite
 set autoread
