@@ -37,3 +37,6 @@
 [submodule ".vim/autoload/Vundle.vim"]
 	path = .vim/autoload/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
+[submodule "pss"]
+	path = pss
+	url = https://github.com/eliben/pss.git

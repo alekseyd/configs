@@ -1,0 +1,14 @@
+BoldAsFont=yes
+Term=xterm-256color
+RightClickAction=paste
+Transparency=medium
+OpaqueWhenFocused=no
+BellSound=yes
+FontSmoothing=full
+Blue=11,100,255
+BoldBlue=63,85,255
+BoldAsColour=yes
+Locale=en_US
+Charset=UTF-8
+Columns=160
+Rows=50
