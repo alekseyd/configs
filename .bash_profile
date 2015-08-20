@@ -13,17 +13,20 @@ export PATH="/usr/local/sbin:$PATH"
 
 
 # MacPorts Bash shell command completion
-if [ -f /opt/local/etc/bash_completion ]; then
-    . /opt/local/etc/bash_completion
-else 
-    type brew 2>/dev/null 1>/dev/null
-    if [ $? -eq "0" ]; then
-        if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        # Homebrew Bash shell command completion
-            . $(brew --prefix)/etc/bash_completion
-        elif [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-        # Homebrew bash-completion2:
-            . $(brew --prefix)/share/bash-completion/bash_completion
+uname -svr | grep "Darwin" >/dev/null 2>&1
+if [ -z "$?" ]; then
+    if [ -f /opt/local/etc/bash_completion ]; then
+        . /opt/local/etc/bash_completion
+    else 
+        type brew 2>/dev/null 1>/dev/null
+        if [ $? -eq "0" ]; then
+            if [ -f $(brew --prefix)/etc/bash_completion ]; then
+            # Homebrew Bash shell command completion
+                . $(brew --prefix)/etc/bash_completion
+            elif [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+            # Homebrew bash-completion2:
+                . $(brew --prefix)/share/bash-completion/bash_completion
+            fi
         fi
     fi
 fi

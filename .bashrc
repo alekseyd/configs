@@ -25,16 +25,31 @@ lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 type vim 2>/dev/null 1>&2 && ! alias vim 2>/dev/null 1>&2 && alias vi=vim
 export EDITOR=`which vi`
 
+#Calculate actual location of configuration scripts(after resolving all softlinks)
+function resolve_path {
+    local scritpname=$1
+    while [ -h $scritpname ]; do scritpname=`readlink $scritpname`; done
+    RESOLVED_CONFIG_NAME=$scritpname
+}
+resolve_path ${BASH_SOURCE[0]}
+CONFIG_LOCATION=`dirname $RESOLVED_CONFIG_NAME`
+unset resolve_path RESOLVED_CONFIG_NAME
 
+
+#in-file search helpers
 function sgrep ()
 {
-    find . -name "*.[ch]pp" | xargs grep -n "$@"
-    find . -name "*.[ch]" | xargs grep -n "$@"
+    find . -name "*.[ch]pp" -o -name "*.[ch]" | xargs grep --color -n "$@"
 }
 function pgrep ()
 {
-    find . -name "*.py" | xargs grep -n "$@"
+    find . -name "*.py" | xargs grep --color -n "$@"
 }
+
+type -a pss >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    alias pss="PYTHONPATH=$PYTHONPATH:$CONFIG_LOCATION/pss/ $CONFIG_LOCATION/pss/scripts/pss"
+fi
 
 alias cd..='cd ..'
 alias cd.='cd .'
@@ -79,18 +94,10 @@ function rmb {
   fi
 }
 
-#Calculate actual location of .profile script (after resolving all softlinks)
-function resolve_path {
-    scritpname=$1
-    while [ -h $scritpname ]; do scritpname=`readlink $scritpname`; done
-    echo $scritpname
-}
-
 #Python fine tuning
 type pip 2>/dev/null 1>&2
 if [ $? -eq 0 ]; then
-    RESOLVED_NAME=`resolve_path ${BASH_SOURCE[0]}`
-    pushd `dirname $RESOLVED_NAME` >/dev/null
+    pushd $CONFIG_LOCATION >/dev/null
     source .pythonrc
     popd >/dev/null
 fi
