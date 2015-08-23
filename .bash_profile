@@ -33,7 +33,7 @@ fi
 
 export PS1="\u@\h:\w>"
 case "$TERM" in
-    screen|xterm-color|xterm|xterm-256color|cygwin)
+    screen|xterm-color|xterm|xterm-256color|cygwin|putty|putty-256color)
         function git_parse_branch()
         {
             name=`git branch 2>/dev/null | grep "^\*" | tr -d "\*\ "`
