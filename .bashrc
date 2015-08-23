@@ -38,11 +38,11 @@ unset resolve_path RESOLVED_CONFIG_NAME
 #in-file search helpers
 function sgrep ()
 {
-    find . -name "*.[ch]pp" -o -name "*.[ch]" | xargs grep --color -n "$@"
+    find . -name "*.[ch]pp" -o -name "*.[ch]" -print0 | xargs -0 grep --color -n "$@"
 }
 function pgrep ()
 {
-    find . -name "*.py" | xargs grep --color -n "$@"
+    find . -name "*.py" -print0 | xargs -0 grep --color -n "$@"
 }
 
 type -a pss >/dev/null 2>&1
