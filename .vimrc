@@ -13,7 +13,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'elzr/vim-json.git'
-Plugin 'majutsushi/tagbar.git'
+"Plugin 'majutsushi/tagbar.git'
 
 " Color schemes
 Plugin 'dsolstad/vim-wombat256i.git'
@@ -35,10 +35,10 @@ set wildmenu
 set tabstop=4 softtabstop=4 expandtab smarttab smartindent  shiftwidth=4 formatoptions=croql
 
 " Tagbar key mapping and tuning
-call tagbar#autoopen(0)
-map <F8> :TagbarOpenAutoClose<CR>
-map <S-F8> :TagbarClose<CR>
-map <M-F8> :Tagbar<CR>
+"call tagbar#autoopen(0)
+"map <F8> :TagbarOpenAutoClose<CR>
+"map <S-F8> :TagbarClose<CR>
+"map <M-F8> :Tagbar<CR>
 
 "doesn't work.....     ##########call NERDTree#autoopen(0)
 " Nerdtree key mapping and tuning
@@ -126,3 +126,13 @@ fun! NoExcitingBuffersLeft()
     endif
 endfun
 autocmd BufWinLeave * call NoExcitingBuffersLeft()
+
+" Cursor shape (insert => vertical line)
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+" Cursor shape - for gvim
+"set guicursor=n-v-c:block-Cursor
+"set guicursor+=i:ver30-iCursor
+"set guicursor="n-v-c:block,o:hor50,i-ci:hor15,r-cr:hor30,sm:block"
