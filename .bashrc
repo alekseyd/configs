@@ -28,13 +28,12 @@ export EDITOR=`which vi`
 #Calculate actual location of configuration scripts(after resolving all softlinks)
 function resolve_path {
     local scritpname=$1
-    while [ -h $scritpname ]; do scritpname=`readlink $scritpname`; done
-    RESOLVED_CONFIG_NAME=$scritpname
+    RESOLVED_CONFIG_NAME="$(readlink -f "$scritpname")"
 }
-resolve_path ${BASH_SOURCE[0]}
-CONFIG_LOCATION=`dirname $RESOLVED_CONFIG_NAME`
-unset resolve_path RESOLVED_CONFIG_NAME
 
+resolve_path ${BASH_SOURCE[0]}
+CONFIG_LOCATION="$(dirname "$RESOLVED_CONFIG_NAME")"
+unset resolve_path RESOLVED_CONFIG_NAME
 
 #in-file search helpers
 function sgrep ()
