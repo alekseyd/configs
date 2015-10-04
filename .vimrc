@@ -20,6 +20,7 @@ Plugin 'dsolstad/vim-wombat256i.git'
 Plugin 'vim-scripts/Wombat.git'
 Plugin 'vim-scripts/wombat256.vim.git'
 Plugin 'ercolanelli-leo/candyVirus'
+colorscheme default
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

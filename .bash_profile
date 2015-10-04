@@ -34,11 +34,11 @@ fi
 export PS1="\u@\h:\w>"
 case "$TERM" in
     screen|xterm-color|xterm|xterm-256color|cygwin|putty|putty-256color)
-        function git_parse_branch()
-        {
-            name=`git branch 2>/dev/null | grep "^\*" | tr -d "\*\ "`
-            [[ -z $name ]] || echo \[$name\]
-        }
+#        function git_parse_branch()
+#        {
+#            name=`git branch 2>/dev/null | grep "^\*" | tr -d "\*\ "`
+#            [[ -z "$name" ]] || echo \[$name\]
+#        }
         normal="\[\e[00m\]"
         bold="\[\e[01m\]"
         green="\[\e[00;32m\]"
@@ -48,14 +48,21 @@ case "$TERM" in
         HOSTNAME=$(hostname -s)
         export PS1="${green}\u${bold}@${normal}${HOSTNAME}${bold}:${purple}\w${darkgrey}\$(git_parse_branch)${normal}> "
         unset normal bold green magenta purple darkgrey
-        # reload .history and set the title to user@host:dir
-        PROMPT_COMMAND='history -a; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} ($(git_parse_branch))\007"'
     ;;
 esac
 
+# Whenever displaying the prompt, write the previous line to disk
+PROMPT_COMMAND='history -a'
+
+# Make bash append rather than overwrite the history on disk
+shopt -s histappend
+# When changing directory small typos can be ignored by bash
+# for example, cd /vr/lgo/apaache would find /var/log/apache
+shopt -s cdspell
+
 #JETHRODATA related stuff
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/java/latest/jre/lib/amd64/server:/usr/lib/impala/lib/"
-export JETHRO_HOME=~/opt/jethro/current
+[[ -z "$JETHRO_HOME" ]] && export JETHRO_HOME=~/opt/jethro/current
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then

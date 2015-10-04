@@ -3,6 +3,8 @@
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
+elif [ -f /etc/bash.bashrc ]; then
+    . /etc/bash.bashrc
 fi
 
 # User specific aliases and functions
@@ -38,7 +40,8 @@ unset resolve_path RESOLVED_CONFIG_NAME
 #in-file search helpers
 function sgrep ()
 {
-    find . -name "*.[ch]pp" -o -name "*.[ch]" -print0 | xargs -0 grep --color -n "$@"
+    find . -name "*.[ch]pp" -print0 | xargs -0 grep --color -n "$@"
+    find . -name "*.[ch]" -print0 | xargs -0 grep --color -n "$@"
 }
 function pgrep ()
 {
@@ -94,12 +97,12 @@ function rmb {
 }
 
 #Python fine tuning
-type pip 2>/dev/null 1>&2
-if [ $? -eq 0 ]; then
-    pushd $CONFIG_LOCATION >/dev/null
-    source .pythonrc
-    popd >/dev/null
-fi
+#type pip 2>/dev/null 1>&2
+#if [ $? -eq 0 ]; then
+#    pushd $CONFIG_LOCATION >/dev/null
+#    source .pythonrc
+#    popd >/dev/null
+#fi
 
 #JETHRODATA related stuff
 JETHRO_SRC=~/SVN/jethro
