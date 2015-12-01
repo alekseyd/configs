@@ -42,7 +42,10 @@ function sgrep ()
 {
     find . -name "*.[ch]pp" -print0 | xargs -0 grep --color -n "$@"
     find . -name "*.[ch]" -print0 | xargs -0 grep --color -n "$@"
+    find . -name "*.[ch]xx" -print0 | xargs -0 grep --color -n "$@"
+    find . -name "*.cc" -print0 | xargs -0 grep --color -n "$@"
 }
+
 function pgrep ()
 {
     find . -name "*.py" -print0 | xargs -0 grep --color -n "$@"
@@ -107,6 +110,7 @@ function rmb {
 #JETHRODATA related stuff
 JETHRO_SRC=~/SVN/jethro
 [[ -d $JETHRO_SRC ]] && alias cdj='cd $JETHRO_SRC'
+[[ -d $JETHRO_SRC ]] && alias cdb='cd $JETHRO_SRC/target/bin'
 SANITY=~/SVN/sanity
 [[ -d $SANITY ]] && alias cds='cd $SANITY' || unset SANITY
 QA_AUTO=~/SVN/qa_auto
