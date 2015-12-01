@@ -66,6 +66,12 @@ function git_parse_branch()
     [[ -z $name ]] || echo \[$name\]
 }
 
+function svnclean()
+{
+    svn status --no-ignore | egrep '^[?I]' | cut -c9- | xargs -d \\n rm -r
+
+}
+
 function rmb {
   current_branch=$(git branch --no-color 2> /dev/null | sed -E -e '/^[^*]/d' -e 's/[*] *([^ ]*).*/\1/')
   if [ "$current_branch" != "master" ]; then
