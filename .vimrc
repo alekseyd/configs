@@ -28,6 +28,10 @@ set nocompatible
 filetype plugin on
 filetype plugin indent on
 
+" support for man plugin
+runtime ftplugin/man.vim
+
+
 " Setup vim command and menu completion
 set wildmode=full
 set wildmenu
