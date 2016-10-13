@@ -1,9 +1,9 @@
 # .bashrc
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
+if [ -s /etc/bashrc ]; then
     . /etc/bashrc
-elif [ -f /etc/bash.bashrc ]; then
+elif [ -s /etc/bash.bashrc ]; then
     . /etc/bash.bashrc
 fi
 

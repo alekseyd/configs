@@ -67,7 +67,8 @@ shopt -s cdspell
 
 # bash replaces directory names with the results of word expansion when performing filename completion.  
 # This changes the contents of the readline editing buffer.  If not set, bash attempts to preserve what the user typed.
-shopt -s direxpand
+# (introduced since bash 4.2)
+shopt  -s direxpand 2>/dev/null
 # bash attempts spelling correction on directory names during word completion if the directory 
 # name initially supplied does not exist.
 shopt -s dirspell
@@ -77,7 +78,6 @@ export LD_LIBRARY_PATH="/usr/local/lib:/usr/java/latest/jre/lib/amd64/server:/us
 [[ -z "$JETHRO_HOME" ]] && export JETHRO_HOME=~/opt/jethro/current
 
 # Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
+# (file exists and not empty)
+[[ -s ~/.bashrc ]] && . ~/.bashrc
 
