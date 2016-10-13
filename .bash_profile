@@ -52,13 +52,25 @@ case "$TERM" in
 esac
 
 # Whenever displaying the prompt, write the previous line to disk
-PROMPT_COMMAND='history -a'
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# Set unlimited history, but keep only 3000 last commands  on disk
+export HISTFILESIZE=3000
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
 
 # Make bash append rather than overwrite the history on disk
 shopt -s histappend
 # When changing directory small typos can be ignored by bash
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
+
+# bash replaces directory names with the results of word expansion when performing filename completion.  
+# This changes the contents of the readline editing buffer.  If not set, bash attempts to preserve what the user typed.
+shopt -s direxpand
+# bash attempts spelling correction on directory names during word completion if the directory 
+# name initially supplied does not exist.
+shopt -s dirspell
 
 #JETHRODATA related stuff
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/java/latest/jre/lib/amd64/server:/usr/lib/impala/lib/"
