@@ -27,6 +27,7 @@ lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 #type vim 2>/dev/null 1>&2 && ! alias vim 2>/dev/null 1>&2 && alias vi=vim
 # ***** already done by /etc/profile.d/vi.sh
 export EDITOR=`alias | which -i vi`
+export FCEDIT=vim
 
 #Calculate actual location of configuration scripts(after resolving all softlinks)
 function resolve_path {
