@@ -116,10 +116,17 @@ function rmb {
 #fi
 
 #JETHRODATA related stuff
-JETHRO_SRC=~/SVN/jethro
+JETHRO_SRC=~/git/jethro
+
 [[ -d $JETHRO_SRC ]] && alias cdj='cd $JETHRO_SRC'
 [[ -d $JETHRO_SRC ]] && alias cdb='cd $JETHRO_SRC/target/bin'
 SANITY=~/SVN/sanity
 [[ -d $SANITY ]] && alias cds='cd $SANITY' || unset SANITY
 QA_AUTO=~/SVN/qa_auto
 [[ -d $QA_AUTO ]] && alias cdq='cd $QA_AUTO' || unset QA_AUTO
+
+#PATH="/home/alekseyd/perl5/bin${PATH:+:${PATH}}"; export PATH;
+#PERL5LIB="/home/alekseyd/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+#PERL_LOCAL_LIB_ROOT="/home/alekseyd/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+#PERL_MB_OPT="--install_base \"/home/alekseyd/perl5\""; export PERL_MB_OPT;
+#PERL_MM_OPT="INSTALL_BASE=/home/alekseyd/perl5"; export PERL_MM_OPT;

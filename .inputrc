@@ -15,6 +15,10 @@
 # Alt-Backspace for undo
 "\e\d": undo
 
+# Up/Down for searching command history
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
 # Ctrl+Up/Down for searching command history
-"\e[1;5A": history-search-backward
-"\e[1;5B": history-search-forward
+"\e[1;5A": reverse-search-history
+"\e[1;5B": forward-search-history

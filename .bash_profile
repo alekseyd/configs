@@ -45,8 +45,18 @@ case "$TERM" in
         magenta="\[\e[00;36m\]"
         purple="\[\e[00;35m\]"
         darkgrey="\[\e[01;30m\]"
+        #Colors from:
+        #  http://www.pantone.com/color-of-the-year-2017
+        BlueRadiance="\[\e[38;2;89;201;213m"
+        Sheepskin="\[\e[38;2;219;181;144m"
+        OrangePopsicle="\[\e[38;2;247;121;36m"
+        PinkIcing="\[\e[38;2;236;161;166m"
+        Marsala="\[\e[38;2;150;79;76m"
+        TangerineTango="\[\e[38;2;225;82;61m"
+        FlameOrange="\[\e[38;2;255;166;79m"
+        Orange="\[\e[38;2;255;109;00m"
         HOSTNAME=$(hostname -s)
-        export PS1="${green}\u${bold}@${normal}${HOSTNAME}${bold}:${purple}\w${darkgrey}\$(git_parse_branch)${normal}> "
+        export PS1="${green}\u${bold}@${normal}${HOSTNAME}${bold}:${purple}\w${Orange}\$(git_parse_branch)${normal}> "
         unset normal bold green magenta purple darkgrey
     ;;
 esac
@@ -80,4 +90,3 @@ export LD_LIBRARY_PATH="/usr/local/lib:/usr/java/latest/jre/lib/amd64/server:/us
 # Get the aliases and functions
 # (file exists and not empty)
 [[ -s ~/.bashrc ]] && . ~/.bashrc
-
