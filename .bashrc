@@ -112,17 +112,6 @@ function rmb {
 type pip2 2>/dev/null 1>&2
 if [ $? -eq 0 ]; then
     pushd $CONFIG_LOCATION >/dev/null
-    export WORKON_HOME=$HOME/venv
-    mkdir -p $WORKON_HOME
-
-    #Locating python2 -- should be good for both Mac and Linux
-    local PPATH=$(basedir $(which pip2))
-    #This way is more Mac specific
-    #PPATH=$(basedir $(brew --prefix))/bin
-
-    export VIRTUALENVWRAPPER_PYTHON=$(PPATH)python2
-    export VIRTUALENVWRAPPER_VIRTUALENV=$(PPATH)/bin/virtualenv
-    export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-    source $(PPATH)/bin/virtualenvwrapper.sh
+    source .pyrc
     popd >/dev/null
 fi
