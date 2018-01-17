@@ -26,13 +26,14 @@ lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 #If "vim" has been installed -- alias vi to vim
 #type vim 2>/dev/null 1>&2 && ! alias vim 2>/dev/null 1>&2 && alias vi=vim
 # ***** already done by /etc/profile.d/vi.sh
-export EDITOR=`alias | which -i vi`
+#export EDITOR=`alias | which -i vi`
+export EDITOR=`alias | which -a vi`
 export FCEDIT=vim
 
 #Calculate actual location of configuration scripts(after resolving all softlinks)
 function resolve_path {
     local scritpname=$1
-    RESOLVED_CONFIG_NAME="$(readlink -f "$scritpname")"
+    RESOLVED_CONFIG_NAME="$(readlink  "$scritpname")"
 }
 
 resolve_path ${BASH_SOURCE[0]}
@@ -107,26 +108,21 @@ function rmb {
   fi
 }
 
-#Python fine tuning
-#type pip 2>/dev/null 1>&2
-#if [ $? -eq 0 ]; then
-#    pushd $CONFIG_LOCATION >/dev/null
-#    source .pythonrc
-#    popd >/dev/null
-#fi
+#Python/virtualenv fine tuning
+type pip2 2>/dev/null 1>&2
+if [ $? -eq 0 ]; then
+    pushd $CONFIG_LOCATION >/dev/null
+    export WORKON_HOME=$HOME/venv
+    mkdir -p $WORKON_HOME
 
-#JETHRODATA related stuff
-JETHRO_SRC=~/git/jethro
+    #Locating python2 -- should be good for both Mac and Linux
+    local PPATH=$(basedir $(which pip2))
+    #This way is more Mac specific
+    #PPATH=$(basedir $(brew --prefix))/bin
 
-[[ -d $JETHRO_SRC ]] && alias cdj='cd $JETHRO_SRC'
-[[ -d $JETHRO_SRC ]] && alias cdb='cd $JETHRO_SRC/target/bin'
-SANITY=~/SVN/sanity
-[[ -d $SANITY ]] && alias cds='cd $SANITY' || unset SANITY
-QA_AUTO=~/SVN/qa_auto
-[[ -d $QA_AUTO ]] && alias cdq='cd $QA_AUTO' || unset QA_AUTO
-
-#PATH="/home/alekseyd/perl5/bin${PATH:+:${PATH}}"; export PATH;
-#PERL5LIB="/home/alekseyd/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-#PERL_LOCAL_LIB_ROOT="/home/alekseyd/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-#PERL_MB_OPT="--install_base \"/home/alekseyd/perl5\""; export PERL_MB_OPT;
-#PERL_MM_OPT="INSTALL_BASE=/home/alekseyd/perl5"; export PERL_MM_OPT;
+    export VIRTUALENVWRAPPER_PYTHON=$(PPATH)python2
+    export VIRTUALENVWRAPPER_VIRTUALENV=$(PPATH)/bin/virtualenv
+    export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+    source $(PPATH)/bin/virtualenvwrapper.sh
+    popd >/dev/null
+fi

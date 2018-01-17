@@ -14,7 +14,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 # MacPorts Bash shell command completion
 uname -svr | grep "Darwin" >/dev/null 2>&1
-if [ -z "$?" ]; then
+if [ $? -eq 0 ]; then
     if [ -f /opt/local/etc/bash_completion ]; then
         . /opt/local/etc/bash_completion
     else 
@@ -83,9 +83,8 @@ shopt  -s direxpand 2>/dev/null
 # name initially supplied does not exist.
 shopt -s dirspell
 
-#JETHRODATA related stuff
-export LD_LIBRARY_PATH="/usr/local/lib:/usr/java/latest/jre/lib/amd64/server:/usr/lib/impala/lib/"
-[[ -z "$JETHRO_HOME" ]] && export JETHRO_HOME=~/opt/jethro/current
+#iTerm2 integration on Mac
+[[ -e "${HOME}/.iterm2_shell_integration.bash" ]]   && . "${HOME}/.iterm2_shell_integration.bash"
 
 # Get the aliases and functions
 # (file exists and not empty)

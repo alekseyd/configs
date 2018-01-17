@@ -1,0 +1,8 @@
+#!/usr/local/bin/bash
+# This hook is sourced after every virtualenv is activated.
+
+
+# 1)
+# pip completion, inspired by:
+# http://pip.readthedocs.org/en/latest/user_guide.html#command-completion
+eval "`pip completion --bash`"
