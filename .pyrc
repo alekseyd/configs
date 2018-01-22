@@ -1,6 +1,6 @@
 #!/bin/sh
-export WORKON_HOME=$HOME/venv
-mkdir -p $WORKON_HOME
+#export WORKON_HOME=$HOME/venv
+#mkdir -p $WORKON_HOME
 
 #Locating python2 -- should be good for both Mac and Linux
 PPATH=$(dirname $(which pip2))
@@ -8,7 +8,7 @@ PPATH=$(dirname $(which pip2))
 #PPATH=$(dirname $(brew --prefix))/bin
 
 export VIRTUALENVWRAPPER_PYTHON=${PPATH}/python2
-export VIRTUALENVWRAPPER_VIRTUALENV=${PPATH}/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV=${PPATH}/virtualenv
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 source ${PPATH}/virtualenvwrapper.sh
 unset PPATH

@@ -30,15 +30,26 @@ lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 export EDITOR=`alias | which -a vi`
 export FCEDIT=vim
 
-#Calculate actual location of configuration scripts(after resolving all softlinks)
+#Detect absolute path of a file or folder (after resolving all softlinks)
+# can be replaced with `realpath' utility from `coreutils'
 function resolve_path {
-    local scritpname=$1
-    RESOLVED_CONFIG_NAME="$(readlink  "$scritpname")"
+    local RESOLVED_PATH=$(cd -P -- "$(dirname -- "$1")" && pwd -P) && RESOLVED_PATH=$RESOLVED_PATH/$(basename -- "$1")
+
+    # resolve symlinks
+    while [[ -h $RESOLVED_PATH ]]; do
+        # 1) cd to directory of the symlink
+        # 2) cd to the directory of where the symlink points
+        # 3) get the pwd
+        # 4) append the basename
+        DIR=$(dirname -- "$RESOLVED_PATH")
+        SYM=$(readlink "$RESOLVED_PATH")
+        RESOLVED_PATH=$(cd "$DIR" && cd "$(dirname -- "$SYM")" && pwd)/$(basename -- "$SYM")
+    done
+    echo $RESOLVED_PATH
 }
 
-resolve_path ${BASH_SOURCE[0]}
-CONFIG_LOCATION="$(dirname "$RESOLVED_CONFIG_NAME")"
-unset resolve_path RESOLVED_CONFIG_NAME
+RESOLVED_PATH=`grealpath ${BASH_SOURCE[0]}`
+CONFIG_LOCATION="$(dirname $RESOLVED_PATH)"
 
 #in-file search helpers
 function sgrep ()
@@ -114,4 +125,15 @@ if [ $? -eq 0 ]; then
     pushd $CONFIG_LOCATION >/dev/null
     source .pyrc
     popd >/dev/null
+fi
+
+#Java initialization
+eval "$(jenv init -)"
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+#PIG init
+PIG_PATH=`type -p pig`
+if [[ -h $PIG_PATH && -z "$PIG_HOME" ]]; then 
+    PIG_PATH=$(grealpath $PIG_PATH)
+    export PIG_HOME=$(dirname `dirname $PIG_PATH`)
 fi
