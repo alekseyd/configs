@@ -1,3 +1,21 @@
+# http://www.gnu.org/software/bash/manual/bash.html#Command-Line-Editing
+
+# $bind -vV                                 ##show current readline variables
+set colored-completion-prefix on
+set visible-stats on
+set colored-stats on
+
+# $bind -pP                                 ##discover current key bindings
+
+#https://unix.stackexchange.com/questions/76566/where-do-i-find-a-list-of-terminal-key-codes-to-remap-shortcuts-in-bash?answertab=votes#tab-top
+# $ sed -n l                                ##discover what given key combination send
+# terminfo -- escape sequence upon pressing a key, e.g.
+# $TERM=xterm tput kdch1 | sed -n l          ##discover what is sent upon pressing  <Delete>
+#       \033[3~$
+# infocmp -- what command corresponds to given sequence, e.g.
+# infocmp -L1 | grep -Fi  "=\e[3~"           ##discover commands bound to \e[3~ aka \033[3~
+#       key_dc=\E[3~
+
 # Ctrl+Left/Right to move by whole words
 "\e[1;5C": forward-word
 "\e[1;5D": backward-word
@@ -7,13 +25,16 @@
 "\C-_": backward-kill-word
 
 # Ctrl+Shift+Backspace/Delete to delete to start/end of the line
-"\e[3;6~": kill-line
-"\xC2\x9F": backward-kill-line  # for UTF-8
+#"\e[3;6~": kill-line
+#"\xC2\x9F": backward-kill-line  # for UTF-8
 #"\x9F": backward-kill-line     # for ISO-8859-x
 #"\e\C-_": backward-kill-line   # for any other charset
 
 # Alt-Backspace for undo
-"\e\d": undo
+#"\e\d": undo
+#"\ec" : capitalize-word
+#"\el" : downcase-word
+#"\eu" : upcase-word
 
 # Up/Down for searching command history
 "\e[A": history-search-backward
