@@ -7,6 +7,10 @@ set colored-stats on
 
 # $bind -pP                                 ##discover current key bindings
 
+set completion-ignore-case on
+#set show-all-if-ambiguous off
+#TAB: menu-complete
+
 #https://unix.stackexchange.com/questions/76566/where-do-i-find-a-list-of-terminal-key-codes-to-remap-shortcuts-in-bash?answertab=votes#tab-top
 # $ sed -n l                                ##discover what given key combination send
 # terminfo -- escape sequence upon pressing a key, e.g.
@@ -43,3 +47,6 @@ set colored-stats on
 # Ctrl+Up/Down for searching command history
 "\e[1;5A": reverse-search-history
 "\e[1;5B": forward-search-history
+
+
+"\e[2~": overwrite-mode

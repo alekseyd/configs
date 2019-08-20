@@ -8,7 +8,6 @@ elif [ -s /etc/bash.bashrc ]; then
 fi
 
 # User specific aliases and functions
-
 alias ls='/bin/ls $LS_OPTIONS'
 #options for GNU version of ls
 export LS_OPTIONS="--classify --literal --color --tabsize 0"
@@ -125,11 +124,18 @@ if [ $? -eq 0 ]; then
     pushd $CONFIG_LOCATION >/dev/null
     source .pyrc
     popd >/dev/null
+    eval "$(pip2 completion --bash 2>/dev/null)"
 fi
+type pip 2>/dev/null 1>&2
+if [ $? -eq 0 ]; then
+    eval "$(pip completion --bash 2>/dev/null)"
+fi
+
+#AWS cmdline complete
+complete -C "$(which aws_completer)" aws
 
 #Java initialization
 eval "$(jenv init -)"
-export JAVA_HOME=$(/usr/libexec/java_home)
 
 #PIG init
 PIG_PATH=`type -p pig`
@@ -137,3 +143,31 @@ if [[ -h $PIG_PATH && -z "$PIG_HOME" ]]; then
     PIG_PATH=$(grealpath $PIG_PATH)
     export PIG_HOME=$(dirname `dirname $PIG_PATH`)
 fi
+
+alias cda='cd ~/crosswise/audplat'
+alias cdc='cd ~/crosswise/crossflow'
+alias cdi='cd ~/crosswise/identity-orchestration'
+alias cdo='cd ~/crosswise/CSG-orchestration'
+alias cds='cd ~/crosswise/pyspark-commons'
+alias cdp='cd ~/crosswise/mod-pixelsrv'
+alias cdr='cd ~/crosswise/relaxmap'
+alias cdt='cd ~/crosswise/offline-targeting'
+
+export ORACLE_GATEWAY="rmdc-proxy.oracle.com:80"
+export CROSSWISE_GATEWAY="gateway.univide.com"
+export CROSSWISE_INTERNAL_DOMAIN="cwl"
+function cwl {
+  ssh_options="Protocol=2"
+  target="$1"
+  if [ "${target}" != "" ]; then
+      shift
+      echo "Connecting to ${target}..."
+      if ! echo ${target} | grep '\.' &> /dev/null; then
+          target="${target}.${CROSSWISE_INTERNAL_DOMAIN}"
+      fi
+      ssh -C -t ${CROSSWISE_GATEWAY} -o ${ssh_options} ssh ${target} ${@}
+  else
+      echo "Connecting to gateway..."
+      ssh -C -o ${ssh_options} ${CROSSWISE_GATEWAY}
+  fi
+}
