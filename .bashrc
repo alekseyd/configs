@@ -47,9 +47,6 @@ function resolve_path {
     echo $RESOLVED_PATH
 }
 
-RESOLVED_PATH=`grealpath ${BASH_SOURCE[0]}`
-CONFIG_LOCATION="$(dirname $RESOLVED_PATH)"
-
 #in-file search helpers
 function sgrep ()
 {
@@ -64,10 +61,13 @@ function pgrep ()
     find . -name "*.py" -print0 | xargs -0 grep --color -n "$@"
 }
 
+RESOLVED_PATH=`grealpath ${BASH_SOURCE[0]}`
+CONFIG_LOCATION="$(dirname $RESOLVED_PATH)"
 type -a pss >/dev/null 2>&1
 if [ $? -ne 0 ]; then
     alias pss="PYTHONPATH=$PYTHONPATH:$CONFIG_LOCATION/pss/ $CONFIG_LOCATION/pss/scripts/pss"
 fi
+unset RESOLVED_PATH CONFIG_LOCATION
 
 alias cd..='cd ..'
 alias cd.='cd .'
@@ -117,23 +117,6 @@ function rmb {
     fi
   fi
 }
-
-#Python/virtualenv fine tuning
-type pip2 2>/dev/null 1>&2
-if [ $? -eq 0 ]; then
-    pushd $CONFIG_LOCATION >/dev/null
-    source .pyrc
-    popd >/dev/null
-    eval "$(pip2 completion --bash 2>/dev/null)"
-fi
-type pip 2>/dev/null 1>&2
-if [ $? -eq 0 ]; then
-    eval "$(pip completion --bash 2>/dev/null)"
-fi
-
-#AWS cmdline complete
-complete -C "$(which aws_completer)" aws
-
 #Java initialization
 eval "$(jenv init -)"
 

@@ -32,6 +32,29 @@ if type brew 2>/dev/null >&2; then
     complete -C $(go env GOPATH)/bin/gocomplete go
 fi
 
+RESOLVED_PATH=`grealpath ${BASH_SOURCE[0]}`
+CONFIG_LOCATION="$(dirname $RESOLVED_PATH)"
+#Python/virtualenv fine tuning
+type pip2 2>/dev/null 1>&2
+if [ $? -eq 0 ]; then
+    pushd $CONFIG_LOCATION >/dev/null
+    source .pyrc
+    popd >/dev/null
+    eval "$(pip2 completion --bash 2>/dev/null)"
+fi
+type pip 2>/dev/null 1>&2
+if [ $? -eq 0 ]; then
+    eval "$(pip completion --bash 2>/dev/null)"
+fi
+unset RESOLVED_PATH CONFIG_LOCATION
+
+#AWS cmdline complete
+complete -C "$(which aws_completer)" aws
+
+#OCI cmdline complete
+OCI_AUTOCOMPLETE=~/lib/oracle-cli/lib/python3.7/site-packages/oci_cli/bin/oci_autocomplete.sh
+[[ -r "$OCI_AUTOCOMPLETE" ]] && . "$OCI_AUTOCOMPLETE"
+
 PS1="\u@\h:\w>"
 case "$TERM" in
     screen|xterm-color|xterm|xterm-256color|cygwin|putty|putty-256color)
@@ -109,13 +132,10 @@ shopt -s histverify
 [[ -r "${HOME}/.iterm2_shell_integration.bash" ]]   && . "${HOME}/.iterm2_shell_integration.bash"
 
 # Get the aliases and functions
-# (file exists and not empty)
+# (file exists and is readable)
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
 export PATH=/Users/aleksey.dashevsky/bin:$PATH
 if type go 2>/dev/null >&2; then
     export PATH=$(go env GOPATH)/bin:$PATH
 fi
-
-OCI_AUTOCOMPLETE=~/lib/oracle-cli/lib/python3.7/site-packages/oci_cli/bin/oci_autocomplete.sh
-[[ -r "$OCI_AUTOCOMPLETE" ]] && . "$OCI_AUTOCOMPLETE"
