@@ -26,7 +26,7 @@ lc >/dev/null 2>&1 || alias lc='env ls -l -F'
 #type vim 2>/dev/null 1>&2 && ! alias vim 2>/dev/null 1>&2 && alias vi=vim
 # ***** already done by /etc/profile.d/vi.sh
 #export EDITOR=`alias | which -i vi`
-export EDITOR=`alias | which -a vi`
+export EDITOR=`alias | which vi`
 export FCEDIT=vim
 
 #Detect absolute path of a file or folder (after resolving all softlinks)
@@ -118,7 +118,9 @@ function rmb {
   fi
 }
 #Java initialization
-eval "$(jenv init -)"
+if which jenv >/dev/null 2>&1; then
+    eval "$(jenv init -)"
+fi
 
 #PIG init
 PIG_PATH=`type -p pig`
