@@ -1,4 +1,5 @@
 # Specify the preferences directory
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/git/configs/"
+script_dir=$(cd "$(dirname "$0")" && pwd)
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${script_dir}/configs/"
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
