@@ -1,3 +1,4 @@
+ulimit -c unlimited
 
 PS1="\u@\h:\w>"
 case "$TERM" in
