@@ -1,19 +1,12 @@
 ulimit -c unlimited
 
-#export PATH="/usr/local/bin:$PATH"
-#export PATH="/usr/local/sbin:$PATH"
-
-#export MANPATH=`manpath`
-#LINUXENVMAN="$HOME/LINUXENV/usr/share/man"
-#export MANPATH=$LINUXENVMAN:$MANPATH
-
 # setup locale correctly
 [  -z "$LC_ALL" ] && export LC_ALL=en_US.UTF-8
 [  -z "$LANG" ] && export LANG=en_US.UTF-8
 
 
 # HomeBrew bash shell command completion
-if uname -svr | grep "Darwin" >/dev/null 2>&1; then
+if uname -svr | grep -q "Darwin" 2>/dev/null; then
     if type brew 2>/dev/null >&2; then
         if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
         # Homebrew bash-completion@2:
@@ -50,10 +43,6 @@ unset RESOLVED_PATH CONFIG_LOCATION
 
 #AWS cmdline complete
 complete -C "$(which aws_completer)" aws
-
-#OCI cmdline complete
-OCI_AUTOCOMPLETE=~/lib/oracle-cli/lib/python3.7/site-packages/oci_cli/bin/oci_autocomplete.sh
-[[ -r "$OCI_AUTOCOMPLETE" ]] && . "$OCI_AUTOCOMPLETE"
 
 PS1="\u@\h:\w>"
 case "$TERM" in
@@ -135,6 +124,7 @@ shopt -s histverify
 # (file exists and is readable)
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
+# Go path setup
 export PATH=/Users/aleksey.dashevsky/bin:$PATH
 if type go 2>/dev/null >&2; then
     export PATH=$(go env GOPATH)/bin:$PATH

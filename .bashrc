@@ -128,37 +128,3 @@ if which scalaenv >/dev/null 2>&1; then
     eval "$(scalaenv init -)"
 fi
 
-#PIG init
-PIG_PATH=`type -p pig`
-if [[ -h $PIG_PATH && -z "$PIG_HOME" ]]; then 
-    PIG_PATH=$(grealpath $PIG_PATH)
-    export PIG_HOME=$(dirname `dirname $PIG_PATH`)
-fi
-
-alias cda='cd ~/crosswise/audplat'
-alias cdc='cd ~/crosswise/crossflow'
-alias cdi='cd ~/crosswise/identity-orchestration'
-alias cdo='cd ~/crosswise/CSG-orchestration'
-alias cds='cd ~/crosswise/pyspark-commons'
-alias cdp='cd ~/crosswise/mod-pixelsrv'
-alias cdr='cd ~/crosswise/relaxmap'
-alias cdt='cd ~/crosswise/offline-targeting'
-
-export ORACLE_GATEWAY="rmdc-proxy.oracle.com:80"
-export CROSSWISE_GATEWAY="gateway.univide.com"
-export CROSSWISE_INTERNAL_DOMAIN="cwl"
-function cwl {
-  ssh_options="Protocol=2"
-  target="$1"
-  if [ "${target}" != "" ]; then
-      shift
-      echo "Connecting to ${target}..."
-      if ! echo ${target} | grep '\.' &> /dev/null; then
-          target="${target}.${CROSSWISE_INTERNAL_DOMAIN}"
-      fi
-      ssh -C -t ${CROSSWISE_GATEWAY} -o ${ssh_options} ssh ${target} ${@}
-  else
-      echo "Connecting to gateway..."
-      ssh -C -o ${ssh_options} ${CROSSWISE_GATEWAY}
-  fi
-}
