@@ -14,17 +14,12 @@ if uname -svr | grep -q "Darwin" 2>/dev/null; then
     fi
 fi
 
-
-# Adding go to path
-#export PATH=/Users/aleksey.dashevsky/bin:$PATH
-#if type go 2>/dev/null >&2; then
-#    export PATH=$(go env GOPATH)/bin:$PATH
-#fi
-
-# Go completion
-if type brew 2>/dev/null >&2; then
-    complete -C $(go env GOPATH)/bin/gocomplete go
+# For Go completion use module
+# https://pkg.go.dev/github.com/posener/complete
+if type go 2>/dev/null >&2; then
+    : # NOOP
 fi
+
 
 #Python completion
 for PIP in pip pip3; do

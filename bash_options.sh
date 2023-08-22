@@ -1,4 +1,5 @@
-ulimit -c unlimited
+ulimit -c 0 # no core files please
+ulimit -n 4096 # no. of open files
 
 PS1="\u@\h:\w>"
 case "$TERM" in
