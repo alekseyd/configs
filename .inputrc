@@ -21,12 +21,12 @@ set completion-ignore-case on
 #       key_dc=\E[3~
 
 # Ctrl+Left/Right to move by whole words
-"\e[1;5C": forward-word
-"\e[1;5D": backward-word
+#"\e[1;5C": forward-word
+#"\e[1;5D": backward-word
 
 # Ctrl+Backspace/Delete to delete whole words
-"\e[3;5~": kill-word
-"\C-_": backward-kill-word
+#"\e[3;5~": kill-word
+#"\C-_": backward-kill-word
 
 # Ctrl+Shift+Backspace/Delete to delete to start/end of the line
 #"\e[3;6~": kill-line
