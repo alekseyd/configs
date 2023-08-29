@@ -25,17 +25,17 @@ Installation
          ```shell
            brew install go 
          ```
-         to install `go` command line expansions, use https://pkg.go.dev/github.com/posener/complete project: 
+         to install `go` command line expansions, use https://pkg.go.dev/github.com/posener/complete project:
         ```shell
           go get -u github.com/posener/complete/gocomplete
           go install github.com/posener/complete/gocomplete@latest
           $(go env GOPATH)/bin/gocomplete -y -install
-        ```    
+        ```
 4. iTerm2 shell integration
     * download integration scripts
     * source them Bash/Zsh config files
 
-5. Setting up user .bash_profile:
+5. Setting up user `.bash_profile`:
     ```shell
       eval "$(/opt/homebrew/bin/brew shellenv bash)"
    
@@ -48,3 +48,7 @@ Installation
       complete -C /Users/aleksey/go/bin/gocomplete go
       source ~/.iterm2_shell_integration.bash
     ```
+6. To edit nested structures in plist use either:
+    * /usr/libexec/PlistBuddy
+    * plutil
+    * AppleScript (https://discussions.apple.com/thread/4709713)
